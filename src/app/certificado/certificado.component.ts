@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-certificado',
@@ -10,27 +10,40 @@ import jsPDF from 'jspdf';
 export class CertificadoComponent {
   studentName: string = '';
   studentId: string = '';
-  showCertificate: boolean = false;
 
-  generateCertificate() {
-    this.showCertificate = true;
-    setTimeout(() => {
-      this.downloadPDF();
-    }, 1000);
-  }
+  async generateCertificate() {
+    const existingPdfBytes = await fetch('/assets/Copia de DIPLOMA Tecnico laboral.docx-1.pdf').then(res =>
+      res.arrayBuffer()
+    );
 
-  downloadPDF() {
-    const certificate = document.getElementById('certificate');
-    if (certificate) {
-      html2canvas(certificate).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF();
-        const imgProps = pdf.getImageProperties(imgData);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-        pdf.save('certificado.pdf');
-      });
-    }
+    const pdfDoc = await PDFDocument.load(existingPdfBytes);
+    const pages = pdfDoc.getPages();
+    const firstPage = pages[0];
+
+    const { width, height } = firstPage.getSize();
+    const fontSize = 24;
+
+    const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+
+    // Ajustar las coordenadas x e y según sea necesario
+    firstPage.drawText(this.studentName, {
+      x: 300, // Coordenada x ajustada
+      y: height - 250, // Coordenada y ajustada
+      size: fontSize,
+      font: timesRomanFont,
+      color: rgb(0, 0, 0),
+    });
+
+    firstPage.drawText(this.studentId, {
+      x: 300, // Coordenada x ajustada
+      y: height - 300, // Coordenada y ajustada
+      size: fontSize,
+      font: timesRomanFont,
+      color: rgb(0, 0, 0),
+    });
+
+    const pdfBytes = await pdfDoc.save();
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    saveAs(blob, 'certificado.pdf');
   }
 }
