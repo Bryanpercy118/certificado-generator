@@ -10,6 +10,19 @@ import { saveAs } from 'file-saver';
 export class CertificadoComponent {
   studentName: string = '';
   studentId: string = '';
+  currentDate: string = '';
+
+  constructor() {
+    this.currentDate = this.getCurrentDate();
+  }
+
+  getCurrentDate(): string {
+    const today = new Date();
+    const day = today.getDate().toString().padStart(2, '0');
+    const month = today.toLocaleString('default', { month: 'long' });
+    const year = today.getFullYear();
+    return `${day} de ${month} de ${year}`;
+  }
 
   async generateCertificate() {
     const existingPdfBytes = await fetch('/assets/Copia de DIPLOMA Tecnico laboral.docx-1.pdf').then(res =>
@@ -22,6 +35,7 @@ export class CertificadoComponent {
 
     const { width, height } = firstPage.getSize();
     const fontSize = 20;
+    const fontDate = 10;
 
     const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
 
@@ -38,6 +52,15 @@ export class CertificadoComponent {
       x: 236, // Coordenada x ajustada
       y: height - 492, // Coordenada y ajustada
       size: fontSize,
+      font: timesRomanFont,
+      color: rgb(0, 0, 0),
+    });
+
+    // Añadir la fecha actual
+    firstPage.drawText(this.currentDate, {
+      x: 380, // Coordenada x ajustada
+      y: height - 583, // Coordenada y ajustada
+      size: fontDate,
       font: timesRomanFont,
       color: rgb(0, 0, 0),
     });
