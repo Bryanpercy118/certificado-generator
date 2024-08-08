@@ -21,22 +21,22 @@ export class CertificadoComponent {
     const firstPage = pages[0];
 
     const { width, height } = firstPage.getSize();
-    const fontSize = 24;
+    const fontSize = 20;
 
     const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
 
     // Ajustar las coordenadas x e y según sea necesario
     firstPage.drawText(this.studentName, {
-      x: 300, // Coordenada x ajustada
-      y: height - 250, // Coordenada y ajustada
+      x: 170, // Coordenada x ajustada
+      y: height - 470, // Coordenada y ajustada
       size: fontSize,
       font: timesRomanFont,
       color: rgb(0, 0, 0),
     });
 
     firstPage.drawText(this.studentId, {
-      x: 300, // Coordenada x ajustada
-      y: height - 300, // Coordenada y ajustada
+      x: 236, // Coordenada x ajustada
+      y: height - 492, // Coordenada y ajustada
       size: fontSize,
       font: timesRomanFont,
       color: rgb(0, 0, 0),
