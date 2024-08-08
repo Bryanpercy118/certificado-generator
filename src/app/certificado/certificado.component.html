@@ -1,0 +1,23 @@
+<div class="container">
+    <h2>Generador de Certificados</h2>
+    <form (ngSubmit)="generateCertificate()">
+      <div class="form-group">
+        <label for="name">Nombre del Estudiante</label>
+        <input type="text" id="name" class="form-control" [(ngModel)]="studentName" name="studentName" required>
+      </div>
+      <div class="form-group">
+        <label for="id">Cédula del Estudiante</label>
+        <input type="text" id="id" class="form-control" [(ngModel)]="studentId" name="studentId" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Generar Certificado</button>
+    </form>
+  
+    <div id="certificate" class="certificate mt-5" *ngIf="showCertificate">
+      <h1>Certificado de Finalización</h1>
+      <p>Este certificado se otorga a:</p>
+      <h2>{{ studentName }}</h2>
+      <p>Identificación: {{ studentId }}</p>
+      <p>Por haber completado satisfactoriamente el curso.</p>
+    </div>
+  </div>
+  
