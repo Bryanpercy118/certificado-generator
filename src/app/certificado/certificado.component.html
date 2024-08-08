@@ -1,15 +1,29 @@
-<div class="container">
-    <h2>Generador de Certificados</h2>
-    <form (ngSubmit)="generateCertificate()">
-      <div class="form-group">
-        <label for="name">Nombre del Estudiante</label>
-        <input type="text" id="name" class="form-control" [(ngModel)]="studentName" name="studentName" required>
+<div class="flex flex-wrap h-screen bg-cover bg-center" style="background-image: url('/assets/imagen.jpeg');">
+    <div class="w-full sm:w-8/12 mb-10 mx-auto">
+      <div class="container mx-auto h-full sm:p-10">
+        <header class="container px-4 lg:flex mt-10 items-center h-full lg:mt-0">
+          <div class="w-full">
+            <div class="container mx-auto p-4 max-w-md">
+              <div class="bg-gray-300 bg-opacity-90 p-8 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold mb-4 text-center text-gray-900">Fundacion Cocha Molina</h2>
+                <form (ngSubmit)="generateCertificate()" class="space-y-6">
+                  <div class="mb-4">
+                    <label for="name" class="block text-gray-700 text-sm font-semibold mb-2">Nombre del Estudiante</label>
+                    <input type="text" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" [(ngModel)]="studentName" name="studentName" required>
+                  </div>
+                  <div class="mb-6">
+                    <label for="id" class="block text-gray-700 text-sm font-semibold mb-2">Cédula del Estudiante</label>
+                    <input type="text" id="id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" [(ngModel)]="studentId" name="studentId" required>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Generar Certificado</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </header>
       </div>
-      <div class="form-group">
-        <label for="id">Cédula del Estudiante</label>
-        <input type="text" id="id" class="form-control" [(ngModel)]="studentId" name="studentId" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Generar Certificado</button>
-    </form>
+    </div>
   </div>
   
