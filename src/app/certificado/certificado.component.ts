@@ -60,7 +60,7 @@ export class CertificadoComponent {
     // Añadir la fecha actual
     firstPage.drawText(this.currentDate, {
       x: 380, // Coordenada x ajustada
-      y: height - 583, // Coordenada y ajustada
+      y: height - 573, // Coordenada y ajustada
       size: fontDate,
       font: timesRomanFont,
       color: rgb(0, 0, 0),
