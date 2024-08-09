@@ -25,6 +25,8 @@ export class CertificadoComponent {
   }
 
   async generateCertificate() {
+    const studentNameUpper = this.studentName.toUpperCase();
+    
     const existingPdfBytes = await fetch('/assets/DTL.pdf').then(res =>
       res.arrayBuffer()
     );
@@ -41,12 +43,12 @@ export class CertificadoComponent {
     const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
 
     // Ajustar las coordenadas x e y según sea necesario
-    firstPage.drawText(this.studentName, {
+    firstPage.drawText(studentNameUpper, {
       x: 167, // Coordenada x ajustada
       y: height - 460, // Coordenada y ajustada
       size: fontSize,
       font: timesRomanFont,
-      color: rgb(0, 0, 0),
+      color: rgb(0, 0, 0), // Puedes ajustar el color si es necesario
     });
 
     firstPage.drawText(this.studentId, {
@@ -54,16 +56,16 @@ export class CertificadoComponent {
       y: height - 483, // Coordenada y ajustada
       size: fontTI,
       font: timesRomanFont,
-      color: rgb(0, 0, 0),
+      color: rgb(0, 0, 0), // Puedes ajustar el color si es necesario
     });
 
-    // Añadir la fecha actual
+    // Añadir la fecha actual con el mismo color que el texto circundante
     firstPage.drawText(this.currentDate, {
       x: 333, // Coordenada x ajustada
       y: height - 574, // Coordenada y ajustada
       size: fontDate,
       font: timesRomanFont,
-      color: rgb(0, 0, 0),
+      color: rgb(0.0, 0.2, 0.4), // Ejemplo de color azul oscuro
     });
 
     const pdfBytes = await pdfDoc.save();
@@ -71,4 +73,3 @@ export class CertificadoComponent {
     saveAs(blob, 'certificado.pdf');
   }
 }
-
