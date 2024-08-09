@@ -51,7 +51,7 @@ export class CertificadoComponent {
 
     firstPage.drawText(this.studentId, {
       x: 216, // Coordenada x ajustada
-      y: height - 485, // Coordenada y ajustada
+      y: height - 483, // Coordenada y ajustada
       size: fontTI,
       font: timesRomanFont,
       color: rgb(0, 0, 0),
