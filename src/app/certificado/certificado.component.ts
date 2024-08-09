@@ -25,7 +25,7 @@ export class CertificadoComponent {
   }
 
   async generateCertificate() {
-    const existingPdfBytes = await fetch('/assets/Copia de DIPLOMA Tecnico laboral.docx-1.pdf').then(res =>
+    const existingPdfBytes = await fetch('/assets/DTL.pdf').then(res =>
       res.arrayBuffer()
     );
 
@@ -34,24 +34,25 @@ export class CertificadoComponent {
     const firstPage = pages[0];
 
     const { width, height } = firstPage.getSize();
-    const fontSize = 20;
+    const fontSize = 17;
+    const fontTI = 14;
     const fontDate = 10;
 
     const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
 
     // Ajustar las coordenadas x e y según sea necesario
     firstPage.drawText(this.studentName, {
-      x: 170, // Coordenada x ajustada
-      y: height - 470, // Coordenada y ajustada
+      x: 190, // Coordenada x ajustada
+      y: height - 460, // Coordenada y ajustada
       size: fontSize,
       font: timesRomanFont,
       color: rgb(0, 0, 0),
     });
 
     firstPage.drawText(this.studentId, {
-      x: 236, // Coordenada x ajustada
-      y: height - 492, // Coordenada y ajustada
-      size: fontSize,
+      x: 216, // Coordenada x ajustada
+      y: height - 482, // Coordenada y ajustada
+      size: fontTI,
       font: timesRomanFont,
       color: rgb(0, 0, 0),
     });
