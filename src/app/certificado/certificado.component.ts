@@ -42,7 +42,7 @@ export class CertificadoComponent {
 
     // Ajustar las coordenadas x e y según sea necesario
     firstPage.drawText(this.studentName, {
-      x: 190, // Coordenada x ajustada
+      x: 167, // Coordenada x ajustada
       y: height - 460, // Coordenada y ajustada
       size: fontSize,
       font: timesRomanFont,
