@@ -9,7 +9,7 @@ import { saveAs } from 'file-saver';
 })
 export class CertificadoComponent implements OnInit {
   studentName: string = '';
-  studentId: string = '';
+  
   currentDate: string = '';
 
   constructor() {
@@ -62,13 +62,13 @@ export class CertificadoComponent implements OnInit {
       color: rgb(0, 0, 0),
     });
 
-    firstPage.drawText(this.studentId, {
-      x: 216, // Coordenada x ajustada
-      y: height - 483, // Coordenada y ajustada
-      size: fontTI,
-      font: timesRomanFont,
-      color: rgb(0, 0, 0),
-    });
+    // firstPage.drawText(this.studentId, {
+    //   x: 216, // Coordenada x ajustada
+    //   y: height - 483, // Coordenada y ajustada
+    //   size: fontTI,
+    //   font: timesRomanFont,
+    //   color: rgb(0, 0, 0),
+    // });
 
     // Añadir la fecha actual
     firstPage.drawText(this.currentDate, {
