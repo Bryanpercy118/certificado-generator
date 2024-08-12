@@ -23,7 +23,9 @@ export class CertificadoComponent implements OnInit {
     const urlParams = new URLSearchParams(window.location.search);
     const nameFromUrl = urlParams.get('nombre');
     if (nameFromUrl) {
-      this.studentName = decodeURIComponent(nameFromUrl).toUpperCase();  
+      // Asegúrate de convertir el nombre a mayúsculas
+      this.studentName = decodeURIComponent(nameFromUrl).toUpperCase();
+      console.log('Nombre en mayúsculas:', this.studentName);
     }
   }
 
@@ -46,24 +48,26 @@ export class CertificadoComponent implements OnInit {
 
     const { width, height } = firstPage.getSize();
     const fontSize = 17;
-    const fontTI = 14;
     const fontDate = 10;
 
-    const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
-    
-    firstPage.drawText(this.studentName, {
-      x: 207, 
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+    // Asegúrate de que el nombre se imprima en mayúsculas
+    const upperCaseName = this.studentName.toUpperCase();
+
+    firstPage.drawText(upperCaseName, {
+      x: 157,
       y: height - 500,
       size: fontSize,
-      font: timesRomanFont,
+      font: font,
       color: rgb(0, 0, 0),
     });
-     
+
     firstPage.drawText(this.currentDate, {
-      x: 333, 
-      y: height - 574, 
+      x: 333,
+      y: height - 578,
       size: fontDate,
-      font: timesRomanFont,
+      font: font,
       color: rgb(0, 0, 0.2),
     });
 
