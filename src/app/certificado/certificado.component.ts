@@ -9,7 +9,6 @@ import { saveAs } from 'file-saver';
 })
 export class CertificadoComponent implements OnInit {
   studentName: string = '';
-  
   currentDate: string = '';
 
   constructor() {
@@ -20,12 +19,11 @@ export class CertificadoComponent implements OnInit {
     this.setStudentNameFromUrl();
   }
 
-  // Función para extraer y asignar el nombre del estudiante desde la URL
   setStudentNameFromUrl(): void {
     const urlParams = new URLSearchParams(window.location.search);
     const nameFromUrl = urlParams.get('nombre');
     if (nameFromUrl) {
-      this.studentName = decodeURIComponent(nameFromUrl).toUpperCase();  // Asegura que el nombre esté en mayúsculas
+      this.studentName = decodeURIComponent(nameFromUrl).toUpperCase();  
     }
   }
 
@@ -52,31 +50,21 @@ export class CertificadoComponent implements OnInit {
     const fontDate = 10;
 
     const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
-
-    // Ajustar las coordenadas x e y según sea necesario
+    
     firstPage.drawText(this.studentName, {
-      x: 207, // Coordenada x ajustada
-      y: height - 500, // Coordenada y ajustada
+      x: 207, 
+      y: height - 500,
       size: fontSize,
       font: timesRomanFont,
       color: rgb(0, 0, 0),
     });
-
-    // firstPage.drawText(this.studentId, {
-    //   x: 216, // Coordenada x ajustada
-    //   y: height - 483, // Coordenada y ajustada
-    //   size: fontTI,
-    //   font: timesRomanFont,
-    //   color: rgb(0, 0, 0),
-    // });
-
-    // Añadir la fecha actual
+     
     firstPage.drawText(this.currentDate, {
-      x: 333, // Coordenada x ajustada
-      y: height - 574, // Coordenada y ajustada
+      x: 333, 
+      y: height - 574, 
       size: fontDate,
       font: timesRomanFont,
-      color: rgb(0, 0, 0.2), // Color actualizado
+      color: rgb(0, 0, 0.2),
     });
 
     const pdfBytes = await pdfDoc.save();
